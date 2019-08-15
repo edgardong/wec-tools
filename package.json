@@ -1,6 +1,6 @@
 {
   "name": "wec-tools",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "description": "wec-tools",
   "main": "src/index.js",
   "files": [
@@ -19,6 +19,7 @@
   ],
   "author": "edgarhao",
   "license": "ISC",
+  "homepage": "https://github.com/edgardong/wec-tools.git",
   "devDependencies": {
     "rollup": "^1.19.4",
     "webpack": "^4.39.1"
