@@ -1,0 +1,31 @@
+{
+  "name": "wec-tools",
+  "version": "0.0.4",
+  "description": "wec-tools",
+  "main": "src/index.js",
+  "files": [
+    "types",
+    "src",
+    "wec"
+  ],
+  "scripts": {
+    "dev": "webpack-dev-server"
+  },
+  "keywords": [
+    "tools",
+    "wec-tools",
+    "validator",
+    "koa"
+  ],
+  "author": "edgarhao",
+  "license": "ISC",
+  "devDependencies": {
+    "rollup": "^1.19.4",
+    "webpack": "^4.39.1"
+  },
+  "dependencies": {
+    "koa": "^2.7.0",
+    "lodash": "^4.17.15",
+    "validator": "^11.1.0"
+  }
+}
