@@ -63,16 +63,26 @@ function getAllMethodNames(obj) {
   return keys
 }
 
-function getAllProperties(obj){
-  let vals= Object.keys(obj)
-  
+function getAllProperties(obj) {
+  let vals = Object.keys(obj)
 }
 
 let cc = new C()
 // console.log(Object.getOwnPropertyNames(cc))
 // console.log(Object.keys(new C()))
 // let cm = getAllMethodNames(cc)
-console.log(Object.keys(cc))
+// console.log(Object.keys(cc))
+
+for (let t in new A()) {
+  console.log(t)
+}
+console.log('------------------------')
+console.log(Object.getOwnPropertyNames(new A()))
+console.log(Object.getPrototypeOf(new A()))
+console.log(Object.getOwnPropertySymbols(new A()))
+console.log(Reflect.ownKeys(new A()))
+console.log(Reflect.ownKeys(Object.getPrototypeOf(new A())))
+console.log(Object.getOwnPropertyNames(Object.getPrototypeOf(new A())))
 
 // cm.forEach(c => {
 //   console.log(cc[c]())

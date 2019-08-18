@@ -1,4 +1,4 @@
-class Exception extends Error {
+class WecException extends Error {
 
   constructor(msg, errorCode) {
     super()
@@ -8,4 +8,4 @@ class Exception extends Error {
   }
 }
 
-module.exports = Exception
+module.exports = WecException

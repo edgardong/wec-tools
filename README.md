@@ -1,4 +1,13 @@
-###  wec-tools
+###  简介
+
+``wec-tools`` 是基于[koa2](https://koa.bootcss.com/)和[kou-router](https://github.com/ZijianHe/koa-router#readme)开发的工具类，目前包含验证器模块（WecValidator），用于API参数校验
+
+![](https://img.shields.io/badge/node-%3E%3D%20v6.10.2-brightgreen)
+
+![](https://img.shields.io/badge/npm-%3E%3D%20v6.10.3-brightgreen)
+
+![](https://img.shields.io/npm/v/npm?label=npm)
+
 
 ### 快速开始
 

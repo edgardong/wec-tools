@@ -34,7 +34,7 @@ class WecValidator {
    */
   async validate(ctx, alias) {
     // 获取所有参数,组成一个集合
-    this.data = Object.assign(ctx.request.header, ctx.params, ctx.query, ctx.body)
+    this.data = Object.assign(ctx.request.header, ctx.params, ctx.request.query, ctx.request.body)
     // 所有的自定义验证方法
     this.validators.funs = this.getAllMethodNames(this)
     // 所有的自定义属性
@@ -61,14 +61,26 @@ class WecValidator {
         // 获取到rules
         let rules = _this[key] // 获取所有需要验证的规则
         let ruleValue = _this.data[key] //获取该字段的输入值
-        if (!ruleValue) {
-          _this.setErrors(key, ruleValue + '不能为空')
+        let isOptional = rules[0].valiateFunction === 'isOptional'
+        if (isOptional) {
+          rules.splice(0, 1)
+          if (ruleValue !== null && ruleValue !== undefined && ruleValue !== '') {
+            rules.forEach(rule => {
+              if (!validator[rule.valiateFunction](ruleValue, rule.options)) {
+                _this.setErrors(key, rule.msg)
+              }
+            })
+          }
         } else {
-          rules.forEach(rule => {
-            if (!validator[rule.valiateFunction](ruleValue, rule.options)) {
-              _this.setErrors(key, rule.msg)
-            }
-          })
+          if (ruleValue === null || ruleValue === undefined || ruleValue === '') {
+            _this.setErrors(key, ruleValue + '不能为空')
+          } else {
+            rules.forEach(rule => {
+              if (!validator[rule.valiateFunction](ruleValue, rule.options)) {
+                _this.setErrors(key, rule.msg)
+              }
+            })
+          }
         }
       })
     }
@@ -79,7 +91,7 @@ class WecValidator {
       funs.forEach(fun => {
         let key = fun.replace(prefix, '')
         try {
-          _this[fun](_this.data)
+          this[fun](_this.data)
         } catch (error) {
           _this.setErrors(key, error.message)
         }
@@ -143,8 +155,5 @@ class WecValidator {
   }
 
 }
-
-
-
 
 module.exports = WecValidator
