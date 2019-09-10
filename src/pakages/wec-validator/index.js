@@ -20,13 +20,6 @@ class WecValidator {
     this.errors = {}
   }
 
-  // this.data = {
-  //   body: ctx.request.body, // body -> body
-  //   query: ctx.request.query, // query -> query
-  //   path: ctx.params, // params -> path
-  //   header: ctx.request.header // header -> header
-  // };
-
   /**
    * 校验所有的参数
    * @param {Object} ctx 需要校验的对象上下文
@@ -39,14 +32,12 @@ class WecValidator {
     this.validators.funs = this.getAllMethodNames(this)
     // 所有的自定义属性
     this.validators.vals = this.getAllProperties(this)
-    // console.log(this.validators.vals)
     // 处理校验
     await this.handleCheck()
 
     if (Object.keys(this.errors).length > 0) {
       throw new WecException(this.errors, 40004)
     }
-
     return this.data
   }
 
@@ -61,15 +52,21 @@ class WecValidator {
         // 获取到rules
         let rules = _this[key] // 获取所有需要验证的规则
         let ruleValue = _this.data[key] //获取该字段的输入值
+        let defaultValue = ''
         let isOptional = rules[0].valiateFunction === 'isOptional'
         if (isOptional) {
+          defaultValue = rules[0].options
           rules.splice(0, 1)
           if (ruleValue !== null && ruleValue !== undefined && ruleValue !== '') {
             rules.forEach(rule => {
               if (!validator[rule.valiateFunction](ruleValue, rule.options)) {
                 _this.setErrors(key, rule.msg)
+              } else if (rule.valiateFunction == 'isInt') {
+                _this.data[key] = parseInt(ruleValue)
               }
             })
+          } else {
+            _this.data[key] = defaultValue
           }
         } else {
           if (ruleValue === null || ruleValue === undefined || ruleValue === '') {

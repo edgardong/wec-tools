@@ -66,5 +66,7 @@ Tips
 > - 校验成功会返回API请求的所有参数，在parmas中
 > - 校验失败会自动抛出 `WecException` 异常
 
+> - 修改lCalender插件, 位于`src`目录下
+
 #### lisence
 MIT
