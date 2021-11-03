@@ -27,6 +27,6 @@
   "dependencies": {
     "koa": "^2.7.0",
     "lodash": "^4.17.15",
-    "validator": "^11.1.0"
+    "validator": "^13.7.0"
   }
 }
